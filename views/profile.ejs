@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-zinc-800 text-white">
+    <div class="flex gap-6">
+        <a href="/logout" class="text-red-700">logout</a>
+        <a href="/username/<%=user._id%>" class="text-green-400">Update Username</a>
+        <a href="/profilepic/<%=user._id%>" class="text-blue-400">Update Profile Picture</a>
+        <a href="/cblog" class="text-green-600">Create A blog</a>
+    </div>
+
+    <div class="mt-2">
+      <div class="mt-5 px-3 py-2">
+        <h1>Welcome <%=user.username%></h1>
+        <div class="h-40 w-40 bg-red-600">
+          <img src="/images/uploads/<%=user.profile%>" class="object-cover overflow-hidden w-full">
+        </div>
+      </div>
+    <div class="flex flex-wrap gap-8 mt-6">
+        <% user.blogs.forEach(function(blog) {%>
+          <div class="border-2 rounded-lg outline-none bg-[#606554]">
+            <h6 class="text-lg mt-2">@<%=user.username%></h6>
+            <p class="text-2xl"><%=blog.content%></p>
+            <h5 class="text-sm">Created <%=blog.date%></h5>
+            <a href="/deleteblog/<%=blog._id%>" class="text-red-400 mt-2">Delete</a>
+            <a href="/editblog/<%=blog._id%>" class="text-blue-600">Edit</a>
+          </div>
+        <%})%>
+    </div>
+    </div>
+    
+</body>
+</html>
