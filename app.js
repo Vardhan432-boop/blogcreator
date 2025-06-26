@@ -15,8 +15,6 @@ const blogModel=require('./models/blogmodel');
 const secret=process.env.SECRET_KEY;
 app.use(express.json());
 app.use(cookieParser());
-app.use(flash());
-app.use(session({secret:"secret",resave:false,saveUninitialized:true,store:MongoStore.create({mongouri:process.env.MONGO_URI})}));
 app.use(express.urlencoded({extended:true}));
 app.set("view engine","ejs");
 app.use(express.static(path.join(__dirname,"public")));
