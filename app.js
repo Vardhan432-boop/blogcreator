@@ -7,9 +7,11 @@ const path=require('path');
 const multer=require('multer');
 const session=require('express-session');
 const flash=require('connect-flash');
+require('dotenv').config();
 const upload=require("./configs/multerconfig")
 const userModel=require('./models/usermodel');
 const blogModel=require('./models/blogmodel');
+const secret=process.env.SECRET_KEY;
 app.use(express.json());
 app.use(cookieParser());
 app.use(flash());
@@ -45,7 +47,7 @@ app.post("/login",async function(req,res){
     if(!user) res.status(404).send("user does not exist");
     bcrypt.compare(req.body.password,user.password,function(err,result){
         if(result){
-            let token1=jwt.sign({email:req.body.email},"ssshhh");
+            let token1=jwt.sign({email:req.body.email},secret);
              res.cookie("token1",token1);
             res.redirect(`/profile/${user._id}`);
         }
